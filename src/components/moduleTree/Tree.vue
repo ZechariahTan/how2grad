@@ -1,11 +1,17 @@
 <template>
   <div class="img-overlay-wrap">
-        <Structure v-if="modulePrereqData.size > 0"
-          v-bind:requiredModules='requiredModules'
-          :modulePrereqData='modulePrereqData'
-          :modulePrereqDataNoModifiers='reqModsNoModfiers'
-          :moduleData='moduleData'
-          :warnMap='warnMap'/>
+    <Structure v-if="modulePrereqData.size > 0"
+      v-bind:requiredModules='requiredModules'
+      :modulePlan="modulePlan"
+      :modulePrereqData='modulePrereqData'
+      :modulePrereqDataNoModifiers='reqModsNoModfiers'
+      :moduleData='moduleData'
+      :warnMap='warnMap'/>
+    <template v-else>
+      <div class="text-lg-h3">
+        No modules selected
+      </div>
+    </template>
   </div>
 </template>
 
@@ -26,7 +32,7 @@ export default {
       warnMap: new Map()
     }
   },
-  props: ['requiredModules'],
+  props: ['requiredModules', 'modulePlan'],
   methods: {
     initData () {
       const promises = []
@@ -75,11 +81,6 @@ export default {
             }
             this.warnMap.set(moduleCode, false)
           } else {
-            // if (this.warnMap.get(moduleCode) === undefined) {
-            //   this.warnMap.set(moduleCode, new Set().add(newList[i]))
-            // } else {
-            //   this.warnMap.get(moduleCode).add(newList[i])
-            // }
             this.warnMap.set(moduleCode, true)
           }
         }
@@ -88,21 +89,15 @@ export default {
 
     processPrereqTree (moduleCode, arr) {
       if (typeof arr === 'string') {
-        if (moduleCode !== arr) {
-          if (this.reqModsNoModfiers.includes(arr)) {
+        let arrNoModifiers = arr.match(/\w+\d\d\d\d/)[0]
+        if (moduleCode !== arrNoModifiers) {
+          if (this.reqModsNoModfiers.includes(arrNoModifiers)) {
             if (this.modulePrereqData.get(moduleCode) === undefined) {
-              this.modulePrereqData.set(moduleCode, new Set().add(arr))
+              this.modulePrereqData.set(moduleCode, new Set().add(arrNoModifiers))
             } else {
-              this.modulePrereqData.get(moduleCode).add(arr)
+              this.modulePrereqData.get(moduleCode).add(arrNoModifiers)
             }
           }
-          // else {
-          //   if (this.warnMap.get(moduleCode) === undefined) {
-          //     this.warnMap.set(moduleCode, new Set().add(arr))
-          //   } else {
-          //     this.warnMap.get(moduleCode).add(arr)
-          //   }
-          // }
         }
       } else if (typeof arr === 'object') {
         for (let i = 0; i < Object.entries(arr)[0][1].length; i++) {
@@ -112,23 +107,18 @@ export default {
     },
     checkWarn (moduleCode, arr) {
       if (typeof arr === 'string') {
+        arr = arr.match(/\w+\d\d\d\d/)[0]
         if (this.reqModsNoModfiers.includes(arr)) {
           return false
         } else {
-          if (this.warnMap.get(moduleCode) === undefined) {
-            this.warnMap.set(moduleCode, new Set().add(arr))
-          } else {
-            this.warnMap.get(moduleCode).add(arr)
-          }
           return true
         }
       } else {
         if (arr.or !== undefined) { // or array
           let warn = true
           for (let i = 0; i < arr.or.length; i++) {
-            if (this.checkWarn(moduleCode, arr.or[i])) {
+            if (!this.checkWarn(moduleCode, arr.or[i])) {
               warn = false
-              break
             }
           }
           return warn
@@ -137,7 +127,6 @@ export default {
           for (let i = 0; i < arr.and.length; i++) {
             if (this.checkWarn(moduleCode, arr.and[i])) {
               warn = true
-              // break
             }
           }
           return warn
@@ -147,14 +136,6 @@ export default {
   },
 
   computed: {
-    // modPrefixReq: function () {
-    //   const temp = new Set()
-    //   this.requiredModules.forEach(modCode => {
-    //     const index = modCode.match(/\d/).index
-    //     temp.add(modCode.slice(0, index))
-    //   })
-    //   return new RegExp(Array.from(temp).join('|'))
-    // },
     reqModsNoModfiers: function () {
       const temp = []
       this.requiredModules.forEach(modCode => temp.push(modCode.match(/\w+\d\d\d\d/)[0]))

@@ -1,6 +1,35 @@
 <template>
     <v-container fluid>
-      <v-row justify="center">
+      <v-row justify="space-between" align="center">
+        <div class="float-left">
+          <v-switch
+            class="pl-7"
+            inset
+            v-model="viewSemColours"
+            :label="`View Year Colours: ${viewSemColours ? 'on' : 'off'}`"
+          ></v-switch>
+        </div>
+        <div class="float-right">
+          <v-row class="pr-7">
+            <v-col
+              v-for="(sem, i) in modulePlan.flat()"
+              :key="i"
+              class="pa-1"
+            >
+             <v-btn 
+              :color="getBadgeColour(i)"
+              :elevation="getElevation(i)"
+              :key="buttonComponentKey"
+              rounded
+              @click="highlightSemMods(i)"
+             >
+             {{semNameArr[i]}}
+             </v-btn>
+            </v-col>
+          </v-row>
+        </div>
+      </v-row>
+      <v-row>
         <v-col class="text-h3 pb-0">
         Related Module Trees
         </v-col>
@@ -10,8 +39,14 @@
         :treeData='entry[1]'
         :modulePrereqData='modulePrereqData'
         :modList='requiredModules'
+        :modulePlan='modulePlan'
         :moduleData='moduleData'
-        :warnMap='warnMap'/>
+        :warnMap='warnMap'
+        :viewSemColours="viewSemColours"
+        :highlightedSem="highlightedSem"
+        :key="treeKey"
+        v-on:mouseOverMod="highlightSemBadge"
+        v-on:mouseLeaveMod="revertSemBadge"/>
       </v-row>
       <v-row justify="center">
         <v-col class="text-h3">
@@ -19,7 +54,13 @@
         </v-col>
       </v-row>
       <v-row>
-        <SingleMods v-bind:unlinkedMods="unlinkedModsList" :moduleData="moduleData" :warnMap='warnMap'/>
+        <SingleMods v-bind:unlinkedMods="unlinkedModsList"
+        :moduleData="moduleData"
+        :modulePlan="modulePlan"
+        :warnMap='warnMap'
+        :viewSemColours="viewSemColours"
+        :highlightedSem="highlightedSem"
+        :key="singleModsKey"/>
       </v-row>
     </v-container>
 </template>
@@ -45,7 +86,15 @@ export default {
       sizeMap: new Map(),
       setMap: new Map(),
       treesMap: new Map(),
-      unlinkedModsList: []
+      unlinkedModsList: [],
+      buttonComponentKey: 0,
+      buttonPressed: [false, false, false, false, false, false, false, false],
+      semNameArr: ['Y1S1', 'Y1S2', 'Y2S1', 'Y2S2', 'Y3S1', 'Y3S2', 'Y4S1', 'Y4S2'],
+      elevationArr: [[0, 0], [0, 0], [0, 0], [0, 0]],
+      viewSemColours: false,
+      highlightedSem: [false, false, false, false, false, false, false, false],
+      treeKey: 0,
+      singleModsKey: 0
     }
   },
   methods: {
@@ -145,9 +194,65 @@ export default {
           this.unlinkedModsList.push(key)
         }
       })
+    },
+    getBadgeColour(i) {
+      const semColourArr= [['#2A9DAF', '#1D8986'],
+      ['#E9C46A', '#CE9E48'],
+      ['#F4A261', '#DD884E'],
+      ['#E76F51', '#C65A44']]
+      const temp = semColourArr.flat(2)
+      if (!this.buttonPressed[i] && !this.viewSemColours) {
+        return 'grey lighten-2'
+      } else {
+        return temp[i]
+      }
+    },
+    getElevation(i) {
+      // console.log('%s, %s %s: %s',i, ~~(i/2), i%2, this.elevationArr[~~(i/2)][i%2])
+      // console.log('%s: %s',~~(i/4),i%4)
+      return this.elevationArr[~~(i/2)][i%2]
+    },
+    highlightSemBadge(hoveredModCode) {
+      for (let i = 0; i < this.modulePlan.length; i++) {
+        for (let j = 0; j < this.modulePlan[i].length; j++) {
+          if (this.modulePlan[i][j].includes(hoveredModCode)) {
+            this.elevationArr[i][j] = 24
+            this.buttonComponentKey++
+          }
+        }
+      }
+
+    },
+    revertSemBadge(hoveredModCode) {
+      for (let i = 0; i < this.modulePlan.length; i++) {
+        for (let j = 0; j < this.modulePlan[i].length; j++) {
+          if (this.modulePlan[i][j].includes(hoveredModCode)) {
+            this.elevationArr[i][j] = 0
+            this.buttonComponentKey++
+          }
+        }
+      }
+    },
+    highlightSemMods(i) {
+      this.highlightedSem[i] = !this.highlightedSem[i]
+      this.buttonPressed[i] = !this.buttonPressed[i] 
+      this.buttonComponentKey++
+      this.treeKey++
+      this.singleModsKey++
+    },
+  },
+  props: ['requiredModules', 'modulePlan', 'modulePrereqData', 'modulePrereqDataNoModifiers', 'moduleData', 'warnMap'],
+  watch:{
+    viewSemColours: function () {
+      for (let i = 0; i < this.buttonPressed.length; i++) {
+        this.buttonPressed[i] = this.viewSemColours
+        this.highlightedSem[i] = this.viewSemColours
+      }
+      this.buttonComponentKey++
+      this.treeKey++
+      this.singleModsKey++
     }
   },
-  props: ['requiredModules', 'modulePrereqData', 'modulePrereqDataNoModifiers', 'moduleData', 'warnMap'],
   mounted () {
     this.genSubTreeSets()
   }
@@ -155,13 +260,11 @@ export default {
 </script>
 
 <style scoped>
-    .tree-structure {
-    }
+    
     #inner-struct ul{
         display: inline-flex;
     }
-    #outer-struct ul{
-    }
+
     .leaf-style {
         padding: 0px;
         position: relative;

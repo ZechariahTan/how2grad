@@ -19,6 +19,12 @@ Vue.use(VueRouter)
     path: '/moduletree',
     name: 'ModuleTree',
     component: () => import('../views/ModuleTree.vue')
+  },
+  {
+    path: '/',
+    redirect:'/plan',
+    name: 'Plan',
+    component: Plan
   }
 ]
 

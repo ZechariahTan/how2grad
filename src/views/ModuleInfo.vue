@@ -9,12 +9,11 @@
         :search-input.sync="search"
         class="text-lg-h6 font-weight-regular"
         flat
-        color="grey lighten-3"
+        color="grey"
         hide-no-data
         hide-selected
         item-text="moduleCode"
-        item-value="moduleCode"
-        placeholder="Search by module code (CS2030 or MA1521)..."
+        placeholder="Search by module code or module name..."
         label="Search for a Module"
         prepend-icon="mdi-database-search"
         return-object
@@ -25,7 +24,7 @@
       <v-list v-if="model" class="mx-5 grey lighten-2 text-lg-left">
         <v-list-item-content>
           <div class="overline mb-4">{{model.faculty + ", " + "Department of " + model.department}}</div>
-          <v-list-item-title class="headline mb-2">{{model.moduleCode + " " + model.title}}</v-list-item-title>
+          <v-list-item-title class="headline mb-2">{{model.moduleCode}}</v-list-item-title>
           <p class="mb-5">{{model.description}}</p>
           <v-list-item-subtitle class="font-weight-regular text-lg-body-1">{{"Modular Credits: " + model.moduleCredit}}</v-list-item-subtitle>
           <v-list-item-subtitle class="font-weight-regular text-lg-body-1">{{"Prerequisites: " + model.prerequisite}}</v-list-item-subtitle>
@@ -62,10 +61,17 @@ export default {
       search: null
     }
   },
-  created () {
-    axios.get('https://api.nusmods.com/v2/2018-2019/moduleInfo.json')
-      .then(response => (this.modules = response.data))
-      .catch(err => console.log(err))
+  async created () {
+    try{
+      let response = await axios.get('https://api.nusmods.com/v2/2018-2019/moduleInfo.json')
+      this.modules = response.data
+    } catch(err){
+      console.log(err)
+    }
+    // Concatenate moduleCode with title
+    for(let i=0; i < this.modules.length; i++) {
+      this.modules[i].moduleCode = this.modules[i].moduleCode + " " + this.modules[i].title
+    }
   }
 }
 </script>

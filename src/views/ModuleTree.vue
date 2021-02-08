@@ -1,7 +1,5 @@
 <template>
-  <div class="tree-title">
-    <Tree v-bind:requiredModules='requiredModules'/>
-  </div>
+  <Tree v-bind:requiredModules='requiredModules' :modulePlan="modulePlan"/>
 </template>
 
 <script>
@@ -14,29 +12,22 @@ export default {
   },
   data () {
     return {
-      requiredModules: []
+      requiredModules: [],
+      modulePlan: []
     }
   },
   methods: {
-    saveMods () {
-      const parsed = JSON.stringify(this.exportedModules)
-      localStorage.setItem('exportedModules', parsed)
-    },
-    addMods (value) {
-      this.exportedModules.push(value.moduleCode)
-      this.saveMods()
-    },
-    removeMods (value) {
-      this.exportedModules = this.exportedModules.filter(mod => mod !== value.moduleCode)
-      this.saveMods()
-    }
   },
   created () {
-    if (localStorage.getItem('exportedModules')) {
+    if (localStorage.getItem('plannedModules')) {
+      console.log('EXISTS')
+      console.log(localStorage.getItem('plannedModules'))
       try {
-        this.requiredModules = JSON.parse(localStorage.getItem('exportedModules'))
+        this.modulePlan = JSON.parse(localStorage.getItem('plannedModules'))
+        this.requiredModules = this.modulePlan.flat(2)
+        console.log(this.plannedModules)
       } catch (e) {
-        localStorage.removeItem('exportedModules')
+        localStorage.removeItem('plannedModules')
       }
     }
   }

@@ -6,12 +6,15 @@
             v-bind:moduleID='mod.modCode'
             v-on:pos-updated='updateEdges'
             v-on:lock-toggled="lockToggled"
-            @mouseover="colourEdges"
-            @mouseleave="revertEdges"
+            @mouseover="mouseOverEvents"
+            @mouseleave="mouseLeaveEvents"
             :id="'SubTreeModule' + mod.modCode"
             :nodeData:='mod'
             :moduleData='moduleData'
-            :warnMap='warnMap'/>
+            :modulePlan='modulePlan'
+            :warnMap='warnMap'
+            :viewSemColours="viewSemColours"
+            :inHighlightedSem="checkHighlighted(mod.modCode)"/>
         </v-col>
       </v-row>
       <div v-for="edge in edgeList" v-bind:key="edge.index">
@@ -31,7 +34,7 @@ export default {
     SubTreeModule,
     Edges
   },
-  props: ['treeRoot', 'treeData', 'modulePrereqData', 'modList', 'moduleData', 'warnMap'],
+  props: ['treeRoot', 'treeData', 'modulePrereqData', 'modList', 'moduleData', 'modulePlan', 'warnMap', 'viewSemColours', 'highlightedSem'],
   data () {
     return {
       stack: [],
@@ -158,7 +161,6 @@ export default {
       }
     },
     updateEdges () {
-      // this.componentKey += 1
       if (this.edgeList.length > 0) {
         this.$refs.edgeRef.forEach(edge => edge.updateEdge())
       }
@@ -166,6 +168,14 @@ export default {
     onResize () {
       this.$refs.subTreeMod.forEach(subTreeMod => subTreeMod.updatePos())
       this.updateEdges()
+    },
+    mouseOverEvents (hoveredModCode) {
+      this.$emit('mouseOverMod', hoveredModCode)
+      this.colourEdges(hoveredModCode)
+    },
+    mouseLeaveEvents (hoveredModCode) {
+      this.$emit('mouseLeaveMod', hoveredModCode)
+      this.revertEdges(hoveredModCode)
     },
     // can improve effeciency
     colourEdges (hoveredModCode) {
@@ -244,6 +254,14 @@ export default {
         }
       })
       this.updateEdges()
+    },
+    checkHighlighted (modCode) {
+      for (let i = 0; i < this.highlightedSem.length; i++) {
+        if(this.highlightedSem[i] && this.modulePlan[~~(i/2)][i%2].includes(modCode)) {
+          return true
+        }
+      }
+      return false
     }
   },
   mounted () {

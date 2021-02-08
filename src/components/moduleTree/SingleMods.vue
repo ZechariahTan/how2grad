@@ -2,43 +2,37 @@
     <v-container fluid>
       <v-row>
         <v-col v-for="mod in unlinkedMods" v-bind:key="mod" justify="center">
-          <v-hover>
-            <template v-slot="{ hover }">
-              <v-card class="mx-auto"
-                min-width="150"
-                max-width="300"
-                default
-                :elevation="hover ? 24 : 3"
-                :color="hover ? hoverColour : defaultModColour"
-              >
-                <v-card-title class="headline pb-0 justify-center">{{mod}}</v-card-title>
-                <v-card-text class="text-sm-subtitle-2">{{moduleData.get(mod).title}}</v-card-text>
-                <!-- <v-icon>mdi-alert</v-icon> -->
-              </v-card>
-            </template>
-          </v-hover>
+          <StandaloneModule :moduleID='mod' :moduleData='moduleData' :modulePlan="modulePlan" :warnMap='warnMap' :viewSemColours="viewSemColours" :inHighlightedSem="checkHighlighted(mod)"/>
         </v-col>
       </v-row>
     </v-container>
 </template>
 
 <script>
-// import SubTreeModule from './SubTreeModule.vue'
+import StandaloneModule from './StandaloneModule.vue'
 
 export default {
   name: 'SingleMods',
   components: {
-    // SubTreeModule
+    StandaloneModule
   },
   data () {
     return {
       defaultModColour: 'grey lighten-2',
-      hoverColour: 'blue lighten-3'
+      hoverColour: 'blue lighten-3',
     }
   },
-  computed: {
+  methods: {
+    checkHighlighted (modCode) {
+      for (let i = 0; i < this.highlightedSem.length; i++) {
+        if(this.highlightedSem[i] && this.modulePlan[~~(i/2)][i%2].includes(modCode)) {
+          return true
+        }
+      }
+      return false
+    }
   },
-  props: ['unlinkedMods', 'moduleData', 'missingMap']
+  props: ['unlinkedMods', 'moduleData', 'modulePlan', 'warnMap', 'viewSemColours', 'highlightedSem']
 }
 </script>
 

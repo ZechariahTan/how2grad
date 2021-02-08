@@ -1,26 +1,26 @@
 <template>
   <v-app>
-    <div id="app">
-      <Header />
-      <div id="nav">
-        <ul id="nav-list">
-        <router-link to="/plan" id="nav-element">
-            <img alt="Logo" src="./assets/planLogo.png" style="width:40px;height:40px;">
-            Plan
-        </router-link>
-        <router-link to="/moduleTree" id="nav-element">
-            <img alt="Logo" src="./assets/treeLogo.png" style="width:40px;height:40px;">
-            Module Tree
-        </router-link>
-        <router-link to="/moduleinfo" id="nav-element">
-            <img alt="Logo" src="./assets/moduleinfoLogo.png" style="width:40px;height:40px;">
-            Module Information
-        </router-link>
-        </ul>
-      </div>
-        <hr>
-      <router-view/>
-      </div>
+    <Header />
+    
+    <div id="nav">
+      <ul id="nav-list">
+      <router-link to="/plan" id="nav-element">
+          <img alt="Logo" src="./assets/planLogo.png" style="width:40px;height:40px;">
+          Plan
+      </router-link>
+      <router-link to="/moduleTree" id="nav-element">
+          <img alt="Logo" src="./assets/treeLogo.png" style="width:40px;height:40px;">
+          Module Tree
+      </router-link>
+      <router-link to="/moduleinfo" id="nav-element">
+          <img alt="Logo" src="./assets/moduleinfoLogo.png" style="width:40px;height:40px;">
+          Module Information
+      </router-link>
+      </ul>
+    </div>
+      <hr>
+    <router-view/>
+    
   </v-app>
 </template>
 
@@ -41,8 +41,10 @@ export default {
 </script>>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
+
 #app {
-  font-family: Avenir;
+  font-family: 'Arimo', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -61,7 +63,7 @@ export default {
   text-decoration: none;
   text-align: left;
   font-size:25px;
-  font-family: Avenir;
+  font-family: 'Arimo', sans-serif;
   /* margin-left: 1px; */
 }
 
