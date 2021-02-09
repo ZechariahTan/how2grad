@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Plan from '../views/Plan.vue'
+import Plan from '../views/CharacterSheet.vue'
 
 Vue.use(VueRouter)
 
@@ -8,7 +8,7 @@ Vue.use(VueRouter)
   {
     path: '/plan',
     name: 'Plan',
-    component: Plan
+    component: () => import('../views/CharacterSheet.vue')
   },
   {
     path: '/moduleinfo',

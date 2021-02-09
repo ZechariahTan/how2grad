@@ -1,39 +1,76 @@
 <template>
   <v-app>
-    <Header />
+    <v-app-bar
+      color="teal lighten-3"
+      dark
+      hide-on-scroll
+      dense
+      scroll-target="#scrolling-techniques-4"
+    >
+      <v-app-bar-nav-icon @click="drawer=true"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>DnDNotBeyond</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+    </v-app-bar>  
     
-    <div id="nav">
-      <ul id="nav-list">
-      <router-link to="/plan" id="nav-element">
-          <img alt="Logo" src="./assets/planLogo.png" style="width:40px;height:40px;">
-          Plan
-      </router-link>
-      <router-link to="/moduleTree" id="nav-element">
-          <img alt="Logo" src="./assets/treeLogo.png" style="width:40px;height:40px;">
-          Module Tree
-      </router-link>
-      <router-link to="/moduleinfo" id="nav-element">
-          <img alt="Logo" src="./assets/moduleinfoLogo.png" style="width:40px;height:40px;">
-          Module Information
-      </router-link>
-      </ul>
-    </div>
-      <hr>
-    <router-view/>
-    
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item link to="/moduleTree" id="nav-element">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item link to="/plan" id="nav-element">
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Character</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main>
+      <v-container fluid>
+        <router-view>
+        </router-view>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
 <script>
-import Header from './components/layout/Header.vue'
 
 export default {
   name: 'app',
   components: {
-    Header
   },
   data () {
     return {
+      drawer: false,
+      group: null,
       isHidden: false
     }
   }
