@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container class="text-center" fluid>
     <!-- <v-navigation-drawer
       permanent
       expand-on-hover
@@ -51,54 +51,308 @@
     </v-navigation-drawer> -->
     <v-row>
       <v-col>
-        <v-card class="mx-auto" tile>
-          <v-row
-            align="center"
-            class="fill-height"
-          >
-            <v-col
-              align-self="start"
-              class="pa-0"
-            >
+        <v-card class="mx-auto" :height="cardHeight" tile >
+          <v-row class="mx-auto">
+            <v-col align="center" class="pa-0 justify-center">
               <v-avatar
                 class="profile"
                 color="grey"
-                size="125"
+                :size="cardHeight"
                 tile
-                align="start"
               >
                 <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
               </v-avatar>
             </v-col>
-            <v-col class="py-0" cols="8">
+            <v-col class="pa-0" cols="8" align="center">
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title class="title">
-                    CharaName
+                    Loooooooooooooooong CharaName
                   </v-list-item-title>
-                  <v-list-item-subtitle>CharaClass / Level</v-list-item-subtitle>
+                  <v-list-item-subtitle>Class / Level</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item class="justify-center">
-                <v-btn color="grey lighten-1 mr-3" small rounded v-on:click="removeAll">
-                  <v-icon med class="mr-2">mdi-delete-sweep</v-icon>
-                  Short rest
-                </v-btn>
-                <v-btn color="grey lighten-1 ml-3" small rounded v-on:click="removeAll">
-                  <v-icon med class="mr-2">mdi-delete-sweep</v-icon>
-                  Long rest
-                </v-btn>
+              <v-list-item>
+                <v-row class="justify-center">
+                  <v-btn color="grey lighten-1 mr-3" med rounded v-on:click="forceUpdate">
+                    <v-icon med class="mr-2">mdi-delete-sweep</v-icon>
+                    Short rest
+                  </v-btn>
+                  <v-btn color="grey lighten-1 ml-3" med rounded v-on:click="removeAll">
+                    <v-icon med class="mr-2">mdi-delete-sweep</v-icon>
+                    Long rest
+                  </v-btn>
+                </v-row>
               </v-list-item>
             </v-col>
           </v-row>
         </v-card>
       </v-col>
-      <v-col>
-        <v-card class="mx-auto fill-height" colour="grey" tile>
-          <v-row class="justify-space-around fill-height">
-            <v-col class="align-center">
-              <v-list-item align-self="center" class ="py-0 my-0">
+      <v-col class="mx-auto">
+        <v-card class="mx-auto" :height="cardHeight" tile>
+          <v-row class="mx-auto" :key="rerenderKey">
+            <v-col class="fill-height">
+             <v-list-item align-self="center" class ="py-0 my-0">
                 <v-row class="justify-center">
+                  <div class="text-h5">
+                    Class: 
+                  </div>
+                  <v-btn small>
+                    Arcane Trickster
+                  </v-btn>
+                </v-row>
+              </v-list-item>
+              <v-list-item align-self="center">
+                <v-row class="justify-center">
+                  <div class="text-h5">
+                    Race:    
+                  </div>
+                  <v-btn small>
+                    Human
+                  </v-btn>
+                </v-row>
+              </v-list-item>
+            </v-col>
+            <v-col align="stretch">
+              <v-list-item class ="py-0 my-0">
+                <v-row class="justify-center">
+                  <div class="text-h5">
+                    Background:    
+                  </div>
+                  <v-btn small>
+                    Noble
+                  </v-btn>
+                </v-row>
+              </v-list-item>
+              <v-list-item>
+                <v-row class="justify-center">
+                  <div class="text-h5">
+                    Alignment:    
+                  </div>
+                  <v-btn small>
+                    Chaotic Neutral
+                  </v-btn>
+                </v-row>
+              </v-list-item>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="6">
+        <v-row>
+          <v-spacer></v-spacer>
+          <v-card cols="2">
+            <div class="px-2 overline">
+              Strength
+            </div>
+            <v-card-title class="pa-0 justify-center">
+              0
+            </v-card-title>
+            <v-card-text class="pa-0 justify-center">
+              10
+            </v-card-text>
+          </v-card>
+          <v-spacer></v-spacer>
+          <v-card cols="2">
+            <div class="px-2 overline">
+              Constitution
+            </div>
+            <v-card-title class="pa-0 justify-center">
+              0
+            </v-card-title>
+            <v-card-text class="pa-0 justify-center">
+              10
+            </v-card-text>
+          </v-card>
+          <v-spacer></v-spacer>
+          <v-card cols="2">
+            <div class="px-2 overline">
+              Dexterity
+            </div>
+            <v-card-title class="pa-0 justify-center">
+              0
+            </v-card-title>
+            <v-card-text class="pa-0 justify-center">
+              10
+            </v-card-text>
+          </v-card>
+          <v-spacer></v-spacer>
+          <v-card cols="2">
+            <div class="px-2 overline">
+              Intelligence
+            </div>
+            <v-card-title class="pa-0 justify-center">
+              0
+            </v-card-title>
+            <v-card-text class="pa-0 justify-center">
+              10
+            </v-card-text>
+          </v-card>
+          <v-spacer></v-spacer>
+          <v-card cols="2">
+            <div class="px-2 overline">
+              Wisdom
+            </div>
+            <v-card-title class="pa-0 justify-center">
+              0
+            </v-card-title>
+            <v-card-text class="pa-0 justify-center">
+              10
+            </v-card-text>
+          </v-card>
+          <v-spacer></v-spacer>
+          <v-card cols="2">
+            <div class="px-2 overline">
+              Charisma
+            </div>
+            <v-card-title class="pa-0 justify-center">
+              0
+            </v-card-title>
+            <v-card-text class="pa-0 justify-center">
+              10
+            </v-card-text>
+          </v-card>
+          <v-spacer></v-spacer>
+        </v-row>
+        <v-row>
+          <v-col cols="6">
+            <v-list-item class="pa-1">
+              <v-card class="d-flex justify-center" width="100%">
+                <v-list width="100%">
+                  <v-list-item class="px-2 justify-space-around">
+                    <v-card class="d-flex justify-center" width="48%">
+                      <v-card-text class="pa-0">
+                        Str
+                      </v-card-text>
+                      <v-card-text class="pa-0" cols="4">
+                        0
+                      </v-card-text>
+                    </v-card>
+                    <v-spacer></v-spacer>
+                    <v-card class="d-flex justify-center" width="48%">
+                      <v-card-text class="pa-0">
+                        Int
+                      </v-card-text>
+                      <v-card-text class="pa-0">
+                        0
+                      </v-card-text>
+                    </v-card>
+                  </v-list-item>
+                  <v-list-item class="px-2 justify-space-around">
+                    <v-card class="d-flex justify-center" width="48%">
+                      <v-card-text class="pa-0">
+                        Con
+                      </v-card-text>
+                      <v-card-text class="pa-0">
+                        0
+                      </v-card-text>
+                    </v-card>
+                    <v-spacer></v-spacer>
+                    <v-card class="d-flex justify-center" width="48%">
+                      <v-card-text class="pa-0">
+                        Wis
+                      </v-card-text>
+                      <v-card-text class="pa-0">
+                        0
+                      </v-card-text>
+                    </v-card>
+                  </v-list-item>
+                  <v-list-item class="px-2 justify-space-around">
+                    <v-card class="d-flex justify-center" width="48%">
+                      <v-card-text class="pa-0">
+                        Dex
+                      </v-card-text>
+                      <v-card-text class="pa-0">
+                        0
+                      </v-card-text>
+                    </v-card>
+                    <v-spacer></v-spacer>
+                    <v-card class="d-flex justify-center" width="48%">
+                      <v-card-text class="pa-0">
+                        Cha
+                      </v-card-text>
+                      <v-card-text class="pa-0">
+                        0
+                      </v-card-text>
+                    </v-card>
+                  </v-list-item>
+                  <div>
+                    <v-card-text class="pa-0">
+                      Saving Throws
+                    </v-card-text>
+                  </div>
+                </v-list>
+              </v-card>
+            </v-list-item>
+            <v-list-item class="pa-1">
+              <v-card class="d-flex justify-center" width="100%">
+                <v-card-title>
+                  Senses
+                </v-card-title>
+              </v-card>
+            </v-list-item>
+            <v-list-item class="pa-1">
+              <v-card class="d-flex justify-center" width="100%">
+                <v-card-title>
+                  Languages and Proficencies
+                </v-card-title>
+              </v-card>
+            </v-list-item>
+          </v-col>
+          <v-col cols="6">
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="6">
+      </v-col>
+    </v-row>
+    <v-row>
+      
+    </v-row>
+  </v-container>
+
+  <!-- <v-col
+    align-self="start"
+    class="pa-0"
+  >
+    <v-avatar
+      class="profile"
+      color="grey"
+      size="125"
+      tile
+      align="start"
+    >
+      <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+    </v-avatar>
+  </v-col>
+  <v-col class="py-0" cols="8">
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title class="title">
+          CharaName
+        </v-list-item-title>
+        <v-list-item-subtitle>CharaClass / Level</v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
+    <v-list-item class="justify-center">
+      <v-btn color="grey lighten-1 mr-3" small rounded v-on:click="removeAll">
+        <v-icon med class="mr-2">mdi-delete-sweep</v-icon>
+        Short rest
+      </v-btn>
+      <v-btn color="grey lighten-1 ml-3" small rounded v-on:click="removeAll">
+        <v-icon med class="mr-2">mdi-delete-sweep</v-icon>
+        Long rest
+      </v-btn>
+    </v-list-item>
+  </v-col> -->
+
+  <!-- <v-card class="mx-auto fill-height" colour="grey" tile>
+          <v-row class="justify-space-around fill-height">
+            <v-col class="align-center fill-height">
+              <v-list-item align-self="center" class ="py-0 my-0">
+                <v-row class="justify-center fill-height">
                   <div class="text-h5">
                     Class: 
                   </div>
@@ -141,95 +395,29 @@
               </v-list-item>
             </v-col>
           </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
-    
-      <!-- <v-row class="pr-30 mr-30">
-        <ul style="list-style: none; display: inline-flex; float: left; margin: 5px 7px;">
-          <SelectPlan v-on:selectedPlan="loadPlan" />
-          <UploadPlan v-bind:plannedModules="plannedModules" :key="UploadPlanKey"/>
-          <v-btn class="mx-1" color="grey lighten-1" x-large rounded v-on:click="removeAll">
-            <v-icon large class="mr-2">mdi-delete-sweep</v-icon>
-            Clear All
-          </v-btn>
-        </ul>
-      </v-row> -->
-      <!-- <v-row class="pr-30 mr-30">
-        <v-col v-for="year in numYears" :key="year" justify="center" class="px-0 mx-0">
-          <Year :year="year" :numSem="numSem[year]" :yearModules="plannedModules[year]" v-on:changeModuleList="changeModuleList" :key="componentKey"/>
-        </v-col>
-      </v-row> -->
-  </v-container>
+        </v-card> -->
 </template>
 
 <script>
-// import Year from '../components/Year.vue'
-// import SelectPlan from '../components/SelectPlan.vue'
-// import UploadPlan from '../components/UploadPlan.vue'
 
 export default {
   name: 'Plan',
   components: {
-    // Year,
-    // SelectPlan,
-    // UploadPlan
   },
   data () {
     return {
-      exportedModules: [],
-      numYears: [0, 1, 2, 3],
-      numSem: [2, 2, 2, 2],
-      plannedModules: [[[],[]],[[],[]],[[],[]],[[],[]]],
-      componentKey: 0,
-      UploadPlanKey: 0
+      cardHeight: '128px',
+      hoverColour: 'blue lighten-3',
+      rerenderKey: 0
     }
   },
   mounted () {
-    if (localStorage.getItem('plannedModules')) {
-      // console.log('EXISTS')
-      // console.log(localStorage.getItem('plannedModules'))
-      try {
-        this.plannedModules = JSON.parse(localStorage.getItem('plannedModules'))
-        console.log(this.plannedModules)
-      } catch (e) {
-        localStorage.removeItem('plannedModules')
-      }
-    } 
   },
   methods: {
-
-    loadPlan (emitData) {
-      this.plannedModules = emitData
-      this.saveModuleList ()
-      this.componentKey++
-      // console.log('loadplan placeholder')
+    update() {
+      this.rerenderKey++;
+      this.$forceUpdate();
     },
-
-    removeAll () {
-      this.plannedModules = [[[],[]],[[],[]],[[],[]],[[],[]]]
-      this.saveModuleList ()
-      this.componentKey++
-      // console.log('removeAll placeholder')
-    },
-
-    changeModuleList (eventData) {
-      // console.log('MODULELISTCHANGED')
-      const yEdited = eventData[0][0] - 1
-      const sEdited = eventData[0][1] - 1
-      const newModuleCodesList = eventData[1]
-      // console.log(newModuleCodesList)
-      this.plannedModules[yEdited][sEdited] = newModuleCodesList
-      this.saveModuleList()
-      this.UploadPlanKey++
-    },
-
-    saveModuleList () {
-      // console.log('SAVED')
-      const parsed = JSON.stringify(this.plannedModules);
-      localStorage.setItem('plannedModules', parsed);
-      // console.log(localStorage.getItem('plannedModules'))
-    }
   }
 }
 </script>
