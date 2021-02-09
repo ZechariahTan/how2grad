@@ -155,23 +155,23 @@
           </v-btn>
         </ul>
       </v-row> -->
-      <v-row class="pr-30 mr-30">
+      <!-- <v-row class="pr-30 mr-30">
         <v-col v-for="year in numYears" :key="year" justify="center" class="px-0 mx-0">
           <Year :year="year" :numSem="numSem[year]" :yearModules="plannedModules[year]" v-on:changeModuleList="changeModuleList" :key="componentKey"/>
         </v-col>
-      </v-row>
+      </v-row> -->
   </v-container>
 </template>
 
 <script>
-import Year from '../components/Year.vue'
+// import Year from '../components/Year.vue'
 // import SelectPlan from '../components/SelectPlan.vue'
 // import UploadPlan from '../components/UploadPlan.vue'
 
 export default {
   name: 'Plan',
   components: {
-    Year,
+    // Year,
     // SelectPlan,
     // UploadPlan
   },
