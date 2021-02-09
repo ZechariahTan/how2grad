@@ -63,9 +63,9 @@
                 <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
               </v-avatar>
             </v-col>
-            <v-col class="pa-0" cols="8" align="center">
+            <v-col class="pa-0" cols="8" >
               <v-list-item>
-                <v-list-item-content>
+                <v-list-item-content class="pa-0">
                   <v-list-item-title class="title">
                     Loooooooooooooooong CharaName
                   </v-list-item-title>
@@ -74,11 +74,11 @@
               </v-list-item>
               <v-list-item>
                 <v-row class="justify-center">
-                  <v-btn color="grey lighten-1 mr-3" med rounded v-on:click="forceUpdate">
+                  <v-btn color="grey lighten-1 mr-3" small rounded v-on:click="forceUpdate">
                     <v-icon med class="mr-2">mdi-delete-sweep</v-icon>
                     Short rest
                   </v-btn>
-                  <v-btn color="grey lighten-1 ml-3" med rounded v-on:click="removeAll">
+                  <v-btn color="grey lighten-1 ml-3" small rounded v-on:click="removeAll">
                     <v-icon med class="mr-2">mdi-delete-sweep</v-icon>
                     Long rest
                   </v-btn>
@@ -90,51 +90,39 @@
       </v-col>
       <v-col class="mx-auto">
         <v-card class="mx-auto" :height="cardHeight" tile>
-          <v-row class="mx-auto" :key="rerenderKey">
-            <v-col class="fill-height">
-             <v-list-item align-self="center" class ="py-0 my-0">
-                <v-row class="justify-center">
-                  <div class="text-h5">
-                    Class: 
-                  </div>
-                  <v-btn small>
-                    Arcane Trickster
-                  </v-btn>
-                </v-row>
-              </v-list-item>
-              <v-list-item align-self="center">
-                <v-row class="justify-center">
-                  <div class="text-h5">
-                    Race:    
-                  </div>
-                  <v-btn small>
-                    Human
-                  </v-btn>
-                </v-row>
-              </v-list-item>
-            </v-col>
-            <v-col align="stretch">
-              <v-list-item class ="py-0 my-0">
-                <v-row class="justify-center">
-                  <div class="text-h5">
-                    Background:    
-                  </div>
-                  <v-btn small>
-                    Noble
-                  </v-btn>
-                </v-row>
-              </v-list-item>
-              <v-list-item>
-                <v-row class="justify-center">
-                  <div class="text-h5">
-                    Alignment:    
-                  </div>
-                  <v-btn small>
-                    Chaotic Neutral
-                  </v-btn>
-                </v-row>
-              </v-list-item>
-            </v-col>
+          <v-row class="py-2 justify-center" :key="rerenderKey">
+            <v-spacer></v-spacer>
+            <div class="text-h5">
+              Class: 
+            </div>
+            <v-btn small>
+              Arcane Trickster
+            </v-btn>
+            <v-spacer></v-spacer>
+            <div class="text-h5">
+              Race:    
+            </div>
+            <v-btn small>
+              Human
+            </v-btn>
+            <v-spacer></v-spacer>
+          </v-row>
+          <v-row class="py-2 justify-center" :key="rerenderKey">
+            <v-spacer></v-spacer>
+            <div class="text-h5">
+              Background:    
+            </div>
+            <v-btn small>
+              Noble
+            </v-btn> 
+            <v-spacer></v-spacer>
+            <div class="text-h5">
+              Alignment:    
+            </div>
+            <v-btn small>
+              Chaotic Neutral
+            </v-btn>
+            <v-spacer></v-spacer>
           </v-row>
         </v-card>
       </v-col>
@@ -406,7 +394,7 @@ export default {
   },
   data () {
     return {
-      cardHeight: '128px',
+      cardHeight: '100px',
       hoverColour: 'blue lighten-3',
       rerenderKey: 0
     }
