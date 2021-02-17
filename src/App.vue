@@ -41,7 +41,7 @@
               <v-list-item-title>Home</v-list-item-title>
             </v-list-item>
 
-            <v-list-item link to="/plan" id="nav-element">
+            <v-list-item link to="/character" id="nav-element">
               <v-list-item-icon>
                 <v-icon>mdi-account</v-icon>
               </v-list-item-icon>

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="text-center" fluid>
+  <v-container class="text-center pa-0" fluid :key="rerenderKey">
     <!-- <v-navigation-drawer
       permanent
       expand-on-hover
@@ -49,7 +49,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer> -->
-    <v-row>
+    <!-- <v-row>
       <v-col>
         <v-card class="mx-auto" :height="cardHeight" tile >
           <v-row class="mx-auto">
@@ -90,7 +90,7 @@
       </v-col>
       <v-col class="mx-auto">
         <v-card class="mx-auto" :height="cardHeight" tile>
-          <v-row class="py-2 justify-center" :key="rerenderKey">
+          <v-row class="mx-auto justify-center" :key="rerenderKey">
             <v-spacer></v-spacer>
             <div class="text-h5">
               Class: 
@@ -107,198 +107,32 @@
             </v-btn>
             <v-spacer></v-spacer>
           </v-row>
-          <v-row class="py-2 justify-center" :key="rerenderKey">
-            <v-spacer></v-spacer>
-            <div class="text-h5">
-              Background:    
-            </div>
-            <v-btn small>
-              Noble
-            </v-btn> 
-            <v-spacer></v-spacer>
-            <div class="text-h5">
-              Alignment:    
-            </div>
-            <v-btn small>
-              Chaotic Neutral
-            </v-btn>
-            <v-spacer></v-spacer>
+          <v-row class="mx-auto justify-center" :key="rerenderKey">
+                  <v-spacer></v-spacer>
+                  <div class="text-h5">
+                    Background:    
+                  </div>
+                  <v-btn small>
+                    Noble
+                  </v-btn> 
+                  <v-spacer></v-spacer>
+                  <div class="text-h5">
+                    Alignment:    
+                  </div>
+                  <v-btn small>
+                    Chaotic Neutral
+                  </v-btn>
+        
           </v-row>
         </v-card>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="6">
-        <v-row>
-          <v-spacer></v-spacer>
-          <v-card cols="2">
-            <div class="px-2 overline">
-              Strength
-            </div>
-            <v-card-title class="pa-0 justify-center">
-              0
-            </v-card-title>
-            <v-card-text class="pa-0 justify-center">
-              10
-            </v-card-text>
-          </v-card>
-          <v-spacer></v-spacer>
-          <v-card cols="2">
-            <div class="px-2 overline">
-              Constitution
-            </div>
-            <v-card-title class="pa-0 justify-center">
-              0
-            </v-card-title>
-            <v-card-text class="pa-0 justify-center">
-              10
-            </v-card-text>
-          </v-card>
-          <v-spacer></v-spacer>
-          <v-card cols="2">
-            <div class="px-2 overline">
-              Dexterity
-            </div>
-            <v-card-title class="pa-0 justify-center">
-              0
-            </v-card-title>
-            <v-card-text class="pa-0 justify-center">
-              10
-            </v-card-text>
-          </v-card>
-          <v-spacer></v-spacer>
-          <v-card cols="2">
-            <div class="px-2 overline">
-              Intelligence
-            </div>
-            <v-card-title class="pa-0 justify-center">
-              0
-            </v-card-title>
-            <v-card-text class="pa-0 justify-center">
-              10
-            </v-card-text>
-          </v-card>
-          <v-spacer></v-spacer>
-          <v-card cols="2">
-            <div class="px-2 overline">
-              Wisdom
-            </div>
-            <v-card-title class="pa-0 justify-center">
-              0
-            </v-card-title>
-            <v-card-text class="pa-0 justify-center">
-              10
-            </v-card-text>
-          </v-card>
-          <v-spacer></v-spacer>
-          <v-card cols="2">
-            <div class="px-2 overline">
-              Charisma
-            </div>
-            <v-card-title class="pa-0 justify-center">
-              0
-            </v-card-title>
-            <v-card-text class="pa-0 justify-center">
-              10
-            </v-card-text>
-          </v-card>
-          <v-spacer></v-spacer>
-        </v-row>
-        <v-row>
-          <v-col cols="6">
-            <v-list-item class="pa-1">
-              <v-card class="d-flex justify-center" width="100%">
-                <v-list width="100%">
-                  <v-list-item class="px-2 justify-space-around">
-                    <v-card class="d-flex justify-center" width="48%">
-                      <v-card-text class="pa-0">
-                        Str
-                      </v-card-text>
-                      <v-card-text class="pa-0" cols="4">
-                        0
-                      </v-card-text>
-                    </v-card>
-                    <v-spacer></v-spacer>
-                    <v-card class="d-flex justify-center" width="48%">
-                      <v-card-text class="pa-0">
-                        Int
-                      </v-card-text>
-                      <v-card-text class="pa-0">
-                        0
-                      </v-card-text>
-                    </v-card>
-                  </v-list-item>
-                  <v-list-item class="px-2 justify-space-around">
-                    <v-card class="d-flex justify-center" width="48%">
-                      <v-card-text class="pa-0">
-                        Con
-                      </v-card-text>
-                      <v-card-text class="pa-0">
-                        0
-                      </v-card-text>
-                    </v-card>
-                    <v-spacer></v-spacer>
-                    <v-card class="d-flex justify-center" width="48%">
-                      <v-card-text class="pa-0">
-                        Wis
-                      </v-card-text>
-                      <v-card-text class="pa-0">
-                        0
-                      </v-card-text>
-                    </v-card>
-                  </v-list-item>
-                  <v-list-item class="px-2 justify-space-around">
-                    <v-card class="d-flex justify-center" width="48%">
-                      <v-card-text class="pa-0">
-                        Dex
-                      </v-card-text>
-                      <v-card-text class="pa-0">
-                        0
-                      </v-card-text>
-                    </v-card>
-                    <v-spacer></v-spacer>
-                    <v-card class="d-flex justify-center" width="48%">
-                      <v-card-text class="pa-0">
-                        Cha
-                      </v-card-text>
-                      <v-card-text class="pa-0">
-                        0
-                      </v-card-text>
-                    </v-card>
-                  </v-list-item>
-                  <div>
-                    <v-card-text class="pa-0">
-                      Saving Throws
-                    </v-card-text>
-                  </div>
-                </v-list>
-              </v-card>
-            </v-list-item>
-            <v-list-item class="pa-1">
-              <v-card class="d-flex justify-center" width="100%">
-                <v-card-title>
-                  Senses
-                </v-card-title>
-              </v-card>
-            </v-list-item>
-            <v-list-item class="pa-1">
-              <v-card class="d-flex justify-center" width="100%">
-                <v-card-title>
-                  Languages and Proficencies
-                </v-card-title>
-              </v-card>
-            </v-list-item>
-          </v-col>
-          <v-col cols="6">
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col cols="6">
-      </v-col>
-    </v-row>
-    <v-row>
-      
-    </v-row>
+    </v-row> -->
+    <CharacterBanner></CharacterBanner>
+    <CharacterDetails></CharacterDetails>
+    <v-btn color="grey lighten-1 ml-3" small rounded v-on:click="update">
+      <v-icon med class="mr-2">mdi-bed</v-icon>
+      test
+    </v-btn>
   </v-container>
 
   <!-- <v-col
@@ -387,16 +221,18 @@
 </template>
 
 <script>
+import CharacterBanner from '../components/CharacterBanner.vue'
+import CharacterDetails from '../components/CharacterDetails.vue'
 
 export default {
-  name: 'Plan',
+  name: 'CharacterSheet',
   components: {
+    CharacterBanner,
+    CharacterDetails,
   },
   data () {
     return {
-      cardHeight: '100px',
-      hoverColour: 'blue lighten-3',
-      rerenderKey: 0
+      rerenderKey: 0,
     }
   },
   mounted () {

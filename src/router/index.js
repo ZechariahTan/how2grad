@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Plan from '../views/CharacterSheet.vue'
+import CharacterSheet from '../views/CharacterSheet.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/plan',
-    name: 'Plan',
+    path: '/character',
+    name: 'Character',
     component: () => import('../views/CharacterSheet.vue')
   },
   {
@@ -22,9 +22,9 @@ Vue.use(VueRouter)
   },
   {
     path: '/',
-    redirect:'/plan',
-    name: 'Plan',
-    component: Plan
+    redirect:'/character',
+    name: 'Character',
+    component: CharacterSheet
   }
 ]
 
